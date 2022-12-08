@@ -6,20 +6,15 @@ using System.Threading.Tasks;
 
 namespace PostBook.Models
 {
-    public class UserModel : IdentityUser
+    public class UserModel
     {
-        public UserModel()
-        {
-            Messages = new HashSet<MessageModel>();
-        }
-
-/*        public string Id { get; set; }
+        public string Id { get; set; }
 
         public string Email { get; set; }
 
         public string UserName { get; set; }
 
-        public string PhoneNumber { get; set; }*/
+        public string PhoneNumber { get; set; }
 
         public ICollection<MessageModel> Messages { get; set; }
     }

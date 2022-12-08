@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PostBook.DataAccess;
 using PostBook.DomainObjects;
+using PostBook.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +15,16 @@ namespace PostBook.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        public readonly ApplicationDbContext _context;
-        public readonly UserManager<User> _userManager;
+        private readonly IUserService _userService;
 
-        public UserController(ApplicationDbContext context, UserManager<User> userManager)
+        public UserController(IUserService userService)
         {
-            _context = context;
-            _userManager = userManager;
+            _userService = userService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var allUsers = await _context.ApplicationUsers.ToListAsync();
+            var allUsers = await _userService.GetAllUsers();
 
             return View(allUsers);
         }

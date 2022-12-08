@@ -10,25 +10,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using PostBook.Models;
+using PostBook.Services.Interfaces;
+using PostBook.Services.Dtos;
 
 namespace PostBook.Controllers
 {
     [Authorize]
     public class HomeController : Controller
     {
-        public readonly ApplicationDbContext _context;
-        public readonly UserManager<User> _userManager;
+        private readonly IUserService _userService;
+        private readonly IMessageService _messageService;
 
-        public HomeController(ApplicationDbContext context, UserManager<User> userManager)
+        public HomeController(IUserService userService, IMessageService messageService)
         {
-            _context = context;
-            _userManager = userManager;
+            _userService = userService;
+            _messageService = messageService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var currentUser = await _userManager.GetUserAsync(User);
-            var messages = await _context.Messages.ToListAsync();
+            var currentUser = await _userService.GetUser(User);
+            var messages = await _messageService.GetAllMessages();
 
             if (User.Identity.IsAuthenticated)
             {
@@ -42,14 +44,7 @@ namespace PostBook.Controllers
         {
             if(ModelState.IsValid)
             {
-                var sender = await _userManager.GetUserAsync(User);
-
-                message.UserName = User.Identity.Name;
-                message.UserId = sender.Id;
-                message.CreatedDate = DateTime.UtcNow;
-
-                await _context.Messages.AddAsync(message);
-                await _context.SaveChangesAsync();
+                await _messageService.CreateMessage(message, User);
 
                 return Ok();
             }
