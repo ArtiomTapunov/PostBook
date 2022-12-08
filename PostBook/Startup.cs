@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,8 @@ using PostBook.DataAccess;
 using PostBook.DomainObjects;
 using PostBook.Models;
 using PostBook.Services.Implementations;
+using PostBook.Services.Interfaces;
+using PostBook.Services.Profiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +40,11 @@ namespace PostBook
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddSignalR();
+            services.AddAutoMapper(typeof(Startup));
+            services.AddControllersWithViews();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMessageService, MessageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,11 +77,6 @@ namespace PostBook
                 endpoints.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHub<ChatHub>("/Home/Index");
             });
-
-/*            app.UseSignalR(route =>
-            {
-                route.MapHub<ChatHub>("/Home/Index");
-            });*/
         }
     }
 }

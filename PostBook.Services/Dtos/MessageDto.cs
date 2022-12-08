@@ -16,6 +16,6 @@ namespace PostBook.Services.Dtos
 
         public string UserId { get; set; }
 
-        public virtual UserDto Sender { get; set; }
+        public UserDto Sender { get; set; }
     }
 }

@@ -1,10 +1,16 @@
-﻿using System;
+﻿using PostBook.DomainObjects;
 using System.Collections.Generic;
-using System.Text;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace PostBook.Services.Interfaces
 {
-    interface IUserService
+    public interface IUserService
     {
+        Task<User> GetUser(ClaimsPrincipal user);
+
+        Task<User> GetUserById();
+
+        Task<IReadOnlyCollection<User>> GetAllUsers();
     }
 }
