@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PostBook.Services.Interfaces
 {
-    interface Interface1
+    interface IUserService
     {
     }
 }

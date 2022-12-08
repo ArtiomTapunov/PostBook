@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostBook", "PostBook\PostBook.csproj", "{3593F862-9A2E-4033-AEFD-73847006363D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostBook.DataAccess", "PostBook.DataAccess\PostBook.DataAccess.csproj", "{6F1A614E-26F5-4E04-8873-FA8035C8A58E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostBook.DataAccess", "PostBook.DataAccess\PostBook.DataAccess.csproj", "{6F1A614E-26F5-4E04-8873-FA8035C8A58E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostBook.DomainObjects", "PostBook.DomainObjects\PostBook.DomainObjects.csproj", "{6FDFB60F-55C2-45D0-9B94-5C5822AA2C99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostBook.DomainObjects", "PostBook.DomainObjects\PostBook.DomainObjects.csproj", "{6FDFB60F-55C2-45D0-9B94-5C5822AA2C99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostBook.Services", "PostBook.Services\PostBook.Services.csproj", "{741B7686-0D0F-4828-BD68-EC1E191F3DF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostBook.Services", "PostBook.Services\PostBook.Services.csproj", "{741B7686-0D0F-4828-BD68-EC1E191F3DF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostBook.Services.Tests", "PostBook.Services.Tests\PostBook.Services.Tests.csproj", "{BA1A588C-639B-4773-88CF-3B33B1A98971}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostBook.Services.Tests", "PostBook.Services.Tests\PostBook.Services.Tests.csproj", "{BA1A588C-639B-4773-88CF-3B33B1A98971}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostBook", "PostBook\PostBook.csproj", "{A01BACB6-B475-4242-B01B-B0C4468F83A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3593F862-9A2E-4033-AEFD-73847006363D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3593F862-9A2E-4033-AEFD-73847006363D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3593F862-9A2E-4033-AEFD-73847006363D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3593F862-9A2E-4033-AEFD-73847006363D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6F1A614E-26F5-4E04-8873-FA8035C8A58E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6F1A614E-26F5-4E04-8873-FA8035C8A58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F1A614E-26F5-4E04-8873-FA8035C8A58E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{BA1A588C-639B-4773-88CF-3B33B1A98971}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA1A588C-639B-4773-88CF-3B33B1A98971}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA1A588C-639B-4773-88CF-3B33B1A98971}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A01BACB6-B475-4242-B01B-B0C4468F83A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A01BACB6-B475-4242-B01B-B0C4468F83A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A01BACB6-B475-4242-B01B-B0C4468F83A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A01BACB6-B475-4242-B01B-B0C4468F83A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,14 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Implementations\" />
-    <Folder Include="Dtos\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PostBook.DataAccess\PostBook.DataAccess.csproj" />
     <ProjectReference Include="..\PostBook.DomainObjects\PostBook.DomainObjects.csproj" />
   </ItemGroup>

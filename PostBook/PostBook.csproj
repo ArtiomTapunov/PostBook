@@ -1,20 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>aspnet-PostBook-A2711FDD-306C-497B-9C30-98C7D9203C98</UserSecretsId>
+    <UserSecretsId>aspnet-PostBook-216BDA27-4542-48B2-83C3-C9BB6D982FF7</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.27" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.27" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.27" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.27" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.27" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.31" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.31" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.31" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.31" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.31" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PostBook.DataAccess\PostBook.DataAccess.csproj" />
+    <ProjectReference Include="..\PostBook.DomainObjects\PostBook.DomainObjects.csproj" />
     <ProjectReference Include="..\PostBook.Services\PostBook.Services.csproj" />
   </ItemGroup>
 
