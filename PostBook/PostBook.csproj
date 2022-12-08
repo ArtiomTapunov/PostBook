@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PostBook.DataAccess\PostBook.DataAccess.csproj" />
+    <ProjectReference Include="..\PostBook.DomainObjects\PostBook.DomainObjects.csproj" />
     <ProjectReference Include="..\PostBook.Services\PostBook.Services.csproj" />
   </ItemGroup>
 

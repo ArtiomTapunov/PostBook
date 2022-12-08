@@ -23,5 +23,7 @@ namespace PostBook.DataAccess
                 .WithMany(x => x.Messages)
                 .HasForeignKey(x => x.UserId);
         }
+
+        public DbSet<Message> Messages { get; set; }
     }
 }
