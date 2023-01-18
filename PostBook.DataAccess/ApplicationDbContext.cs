@@ -22,9 +22,17 @@ namespace PostBook.DataAccess
                 .HasOne<User>(x => x.Sender)
                 .WithMany(x => x.Messages)
                 .HasForeignKey(x => x.UserId);
+
+/*            builder.Entity<ChatUser>()
+                .HasKey(x => new { x.ChatId, x.UserId });*/
         }
 
         public DbSet<User> ApplicationUsers { get; set; }
+
         public DbSet<Message> Messages { get; set; }
+
+        public DbSet<Chat> Chats { get; set; }
+
+        public DbSet<ChatUser> ChatUsers { get; set; }
     }
 }

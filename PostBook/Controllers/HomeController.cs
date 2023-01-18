@@ -20,24 +20,33 @@ namespace PostBook.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMessageService _messageService;
+        private readonly IRoomService _roomService;
 
-        public HomeController(IUserService userService, IMessageService messageService)
+        public HomeController(IUserService userService, IMessageService messageService, IRoomService roomService)
         {
             _userService = userService;
             _messageService = messageService;
+            _roomService = roomService;
         }
 
         public async Task<IActionResult> Index()
         {
             var currentUser = await _userService.GetUser(User);
-            var messages = await _messageService.GetAllMessages();
+
+            var chats = await _roomService.GetRoomsToJoin(currentUser.Id);
 
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.CurrentUserName = currentUser.UserName;
             }
 
-            return View(messages);
+            return View(chats);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Chat(Guid id)
+        {
+            return View(await _roomService.GetRoom(id));
         }
 
         public async Task<IActionResult> CreateMessage(Message message)
@@ -46,10 +55,28 @@ namespace PostBook.Controllers
             {
                 await _messageService.CreateMessage(message, User);
 
-                return Ok();
+                return RedirectToAction("Chat", new { id = message.ChatId });
             }
 
             return Error();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRoom(string name)
+        {
+            var currentUser = await _userService.GetUser(User);
+            await _roomService.CreateRoom(name, currentUser.Id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> JoinRoom(Guid id)
+        {
+            var currentUser = await _userService.GetUser(User);
+            await _roomService.JoinRoom(id, currentUser.Id);
+
+            return RedirectToAction("Chat", "Home", new { id });
         }
 
         public IActionResult Privacy()

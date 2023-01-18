@@ -18,5 +18,9 @@ namespace PostBook.DomainObjects
         public string UserId { get; set; }
 
         public virtual User Sender { get; set; }
+
+        public Guid ChatId { get; set; }
+
+        public Chat Chat { get; set; }
     }
 }

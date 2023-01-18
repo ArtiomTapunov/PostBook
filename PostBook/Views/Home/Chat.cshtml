@@ -1,0 +1,118 @@
+@model Chat
+@{ var userName = User.Identity.Name; }
+
+<div class="jumbotron bg-light">
+    <h2 class="text-center text-primary">
+        <i class="fab fa-facebook-messenger"></i>&nbsp; @Model.Name
+    </h2>
+    <div class="row">
+        <div class="col-sm-12">
+                @if (Model != null)
+                {                        
+                    @foreach (var message in Model.Messages.OrderBy(m => m.CreatedDate))
+                    {
+                        string containerClass, timePosition, textAlign, contcolor, offset;
+                        if (userName == message.UserName)
+                        {
+                            containerClass = "container darker";
+                            timePosition = "time-right text-light";
+                            textAlign = "text-right text-white";
+                            contcolor = "bg-primary";
+                            offset = "col-sm-6 offset-sm-6";
+                        }
+                        else
+                        {
+                            containerClass = "container";
+                            timePosition = "time-left";
+                            textAlign = "text-left";
+                            contcolor = "bg-light";
+                            offset = "";
+                        }
+
+                        <div class="row">
+                            <div class="@offset">
+                                <div class="@containerClass @contcolor">
+
+                                    <p class="sender @textAlign">@message.UserName</p>
+                                    <p class="@textAlign">@message.Text</p>
+                                    <span class="@timePosition">@message.CreatedDate.ToString("M/dd/yyyy hh:MM tt")</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+@*            <div class="row">
+                <form asp-controller="Home" asp-action="CreateMessage"
+                      data-ajax-begin="clearInputField" data-ajax-complete=""
+                      data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
+                      data-ajax="true" data-ajax-method="POST">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input name="Text" class="form-control" id="messageText" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
+                    </div>
+                    <input type="hidden" value="@userName" name="username" />
+                </form>
+            </div>*@
+        </div>
+    </div>
+</div>
+<form class="chat-input" onsubmit="sendMessage(event)" asp-controller="Home" asp-action="CreateMessage">
+    <input type="hidden" name="chatId" value="@Model.Id">
+    <input type="hidden" name="userName" value="@userName" />
+    <input type="text" name="Text" id="message-input">
+    <button type="submit">Send</button>
+</form>
+
+@*@section scripts {
+<script src="~/js/signalr.min.js"></script>
+<script src="~/js/messageBuilder.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub")
+        .build();
+
+    var _connectionId = '';
+
+    connection.on("RecieveMessage", function (data) {
+        var message = messageBuilder()
+            .createMessage()
+            .withHeader(data.name)
+            .withParagraph(data.text)
+            .withFooter(data.timestamp)
+            .build();
+
+        document.querySelector('.chat-body').append(message);
+    })
+
+    connection.start()
+        .then(function () {
+            connection.invoke('joinRoom', '@Model.Id');
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+
+    window.addEventListener('onunload', function () {
+        connection.invoke('leaveRoom', '@Model.Id');
+    })
+
+    var sendMessage = function (event) {
+        event.preventDefault();
+
+        var data = new FormData(event.target);
+        document.getElementById('message-input').value = '';
+        axios.post('/Home/SendMessage', data)
+            .then(res => {
+                console.log("Message Sent!")
+            })
+            .catch(err => {
+                console.log("Failed to send message!")
+            })
+    }
+
+</script>
+}*@

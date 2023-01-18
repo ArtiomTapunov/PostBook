@@ -6,6 +6,7 @@ using PostBook.Services.Dtos;
 using PostBook.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -39,9 +40,12 @@ namespace PostBook.Services.Implementations
             return message;
         }
 
-        public async Task<IReadOnlyCollection<Message>> GetAllMessages()
+        public async Task<IReadOnlyCollection<Message>> GetAllMessagesByChatId(Guid chatId)
         {
-            var allMessages = await _context.Messages.AsNoTracking().ToListAsync();
+            var allMessages = await _context.Messages
+                                            .AsNoTracking()
+                                            .Where(x => x.ChatId == chatId)
+                                            .ToListAsync();
 
             return allMessages;
         }

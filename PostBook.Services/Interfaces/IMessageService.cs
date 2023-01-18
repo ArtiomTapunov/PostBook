@@ -12,7 +12,7 @@ namespace PostBook.Services.Interfaces
     {
         Task<MessageDto> GetMessageById();
 
-        Task<IReadOnlyCollection<Message>> GetAllMessages();
+        Task<IReadOnlyCollection<Message>> GetAllMessagesByChatId(Guid chatId);
 
         Task<Message> CreateMessage(Message message, ClaimsPrincipal user);
     }
