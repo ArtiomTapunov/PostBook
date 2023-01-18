@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authorization;
 using PostBook.Models;
 using PostBook.Services.Interfaces;
 using PostBook.Services.Dtos;
+using Microsoft.AspNetCore.SignalR;
+using PostBook.Hubs;
 
 namespace PostBook.Controllers
 {
@@ -51,7 +53,7 @@ namespace PostBook.Controllers
 
         public async Task<IActionResult> CreateMessage(Message message)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 await _messageService.CreateMessage(message, User);
 
@@ -59,6 +61,21 @@ namespace PostBook.Controllers
             }
 
             return Error();
+        }
+
+        public async Task<IActionResult> SendMessage(Message message, [FromServices] IHubContext<ChatHub> chat)
+        {
+            var createdMessage = await _messageService.CreateMessage(message, User);
+
+            await chat.Clients.Group(message.ChatId.ToString())
+                .SendAsync("RecieveMessage", new
+                {
+                    Text = createdMessage.Text,
+                    UserName = createdMessage.UserName,
+                    CreatedDate = createdMessage.CreatedDate.ToString("dd/MM/yyyy hh:mm:ss")
+                });
+
+            return Ok();
         }
 
         [HttpPost]

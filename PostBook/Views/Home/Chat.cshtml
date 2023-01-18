@@ -6,7 +6,7 @@
         <i class="fab fa-facebook-messenger"></i>&nbsp; @Model.Name
     </h2>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12" id="chat">
                 @if (Model != null)
                 {                        
                     @foreach (var message in Model.Messages.OrderBy(m => m.CreatedDate))
@@ -66,8 +66,8 @@
     <button type="submit">Send</button>
 </form>
 
-@*@section scripts {
-<script src="~/js/signalr.min.js"></script>
+@section scripts {
+<script src="~/signalr/signalr.min.js"></script>
 <script src="~/js/messageBuilder.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -77,15 +77,34 @@
 
     var _connectionId = '';
 
-    connection.on("RecieveMessage", function (data) {
-        var message = messageBuilder()
-            .createMessage()
-            .withHeader(data.name)
-            .withParagraph(data.text)
-            .withFooter(data.timestamp)
-            .build();
+    connection.on("RecieveMessage", function (message) {
+        console.log("Recieved Message")
+        console.log(message)
+        let isCurrentUserMessage = message.userName === "@userName";
 
-        document.querySelector('.chat-body').append(message);
+        let container = document.createElement('div');
+        container.className = isCurrentUserMessage ? "container darker" : "container";
+
+        let sender = document.createElement('p');
+        sender.className = "sender";
+        sender.innerHTML = message.userName;
+        let text = document.createElement('p');
+        text.innerHTML = message.text;
+
+        let createdDate = document.createElement('span');
+        createdDate.className = isCurrentUserMessage ? "time-left" : "time-right";
+        var currentdate = new Date();
+        createdDate.innerHTML =
+            (currentdate.getMonth() + 1) + "/"
+            + currentdate.getDate() + "/"
+            + currentdate.getFullYear() + " "
+            + currentdate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+
+        container.appendChild(sender);
+        container.appendChild(text);
+        container.appendChild(createdDate);
+
+        document.getElementById('chat').appendChild(container);
     })
 
     connection.start()
@@ -115,4 +134,4 @@
     }
 
 </script>
-}*@
+}

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PostBook.DataAccess;
 using PostBook.DomainObjects;
+using PostBook.Hubs;
 using PostBook.Services.Implementations;
 using PostBook.Services.Interfaces;
 
@@ -69,7 +70,13 @@ namespace PostBook
                 endpoints.MapControllers();
                 endpoints.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHub<ChatHub>("/Home/Index");
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
+
+/*            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
+            });*/
         }
     }
 }
