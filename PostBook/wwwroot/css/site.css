@@ -15,8 +15,8 @@ a {
 
 .btn-primary {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  background-color: #57446b;
+  border-color: #443554;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -89,7 +89,7 @@ body {
 /* Darker chat container */
 #chat .darker {
     border-color: #fff;
-    background-color: #0081fc !important;
+    background-color: /*#0081fc*/ #57446b !important;
     border: 2px solid #dedede;
     border-radius: 30px;
     padding: 10px;
@@ -136,6 +136,14 @@ body {
 
 * {
     box-sizing: border-box;
+}
+
+.main-color {
+    color: #443554 !important;
+}
+
+.main-color-light {
+    color: #57446b !important;
 }
 
 body {
@@ -199,6 +207,10 @@ body {
 
     .room-button:hover {
         box-shadow: 0 2px 3px 1px #222;
+    }
+
+    .room-button:last-child {
+        margin-bottom: 0.75rem;
     }
 
 .chat {

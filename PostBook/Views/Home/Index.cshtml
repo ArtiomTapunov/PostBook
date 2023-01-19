@@ -4,7 +4,10 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <div class="chat-body">
+    <h2 class="text-center main-color">
+        <i class="fab fa-facebook-messenger"></i>&nbsp; Join Room
+    </h2>
+    <div>
         @foreach (var chat in Model)
         {
             <a class="room-button" asp-controller="Home" asp-action="JoinRoom" asp-route-id="@chat.Id">

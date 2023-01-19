@@ -2,7 +2,7 @@
 @{ var userName = User.Identity.Name; }
 
 <div class="jumbotron bg-light">
-    <h2 class="text-center text-primary">
+    <h2 class="text-center main-color">
         <i class="fab fa-facebook-messenger"></i>&nbsp; @Model.Name
     </h2>
     <div class="row">
@@ -17,7 +17,7 @@
                             containerClass = "container darker";
                             timePosition = "time-right text-light";
                             textAlign = "text-right text-white";
-                            contcolor = "bg-primary";
+                            contcolor = "main-color-light";
                             offset = "col-sm-6 offset-sm-6";
                         }
                         else
@@ -82,17 +82,22 @@
         console.log(message)
         let isCurrentUserMessage = message.userName === "@userName";
 
+        let rowContainer = document.createElement('div');
+        rowContainer.className = "row";
+        let columnContainer = document.createElement('div');
+        columnContainer.className = isCurrentUserMessage ? "col-sm-6 offset-sm-6" : "";
         let container = document.createElement('div');
-        container.className = isCurrentUserMessage ? "container darker" : "container";
+        container.className = isCurrentUserMessage ? "container darker main-color-light" : "container bg-light";
 
         let sender = document.createElement('p');
-        sender.className = "sender";
+        sender.className = isCurrentUserMessage ? "sender text-right text-white" : "sender text-left";
         sender.innerHTML = message.userName;
         let text = document.createElement('p');
+        text.className = isCurrentUserMessage ? "text-right text-white" : "text-left";
         text.innerHTML = message.text;
 
         let createdDate = document.createElement('span');
-        createdDate.className = isCurrentUserMessage ? "time-left" : "time-right";
+        createdDate.className = isCurrentUserMessage ? "time-right text-light" : "time-left";
         var currentdate = new Date();
         createdDate.innerHTML =
             (currentdate.getMonth() + 1) + "/"
@@ -103,8 +108,10 @@
         container.appendChild(sender);
         container.appendChild(text);
         container.appendChild(createdDate);
+        columnContainer.appendChild(container);
+        rowContainer.appendChild(columnContainer);
 
-        document.getElementById('chat').appendChild(container);
+        document.getElementById('chat').appendChild(rowContainer);
     })
 
     connection.start()
