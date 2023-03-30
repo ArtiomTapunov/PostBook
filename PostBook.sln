@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostBook.Services", "PostBo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostBook.Services.Tests", "PostBook.Services.Tests\PostBook.Services.Tests.csproj", "{BA1A588C-639B-4773-88CF-3B33B1A98971}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostBook", "PostBook\PostBook.csproj", "{A01BACB6-B475-4242-B01B-B0C4468F83A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostBook", "PostBook\PostBook.csproj", "{A01BACB6-B475-4242-B01B-B0C4468F83A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalTestApp", "ExternalTestApp\ExternalTestApp.csproj", "{A6A307C9-76D4-4538-A02D-3189577B2A36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{A01BACB6-B475-4242-B01B-B0C4468F83A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A01BACB6-B475-4242-B01B-B0C4468F83A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A01BACB6-B475-4242-B01B-B0C4468F83A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6A307C9-76D4-4538-A02D-3189577B2A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6A307C9-76D4-4538-A02D-3189577B2A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6A307C9-76D4-4538-A02D-3189577B2A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6A307C9-76D4-4538-A02D-3189577B2A36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

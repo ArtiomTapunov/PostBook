@@ -69,14 +69,13 @@ namespace PostBook
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
                 endpoints.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapHub<ChatHub>("/Home/Index");
                 endpoints.MapHub<ChatHub>("/chatHub");
             });
 
-/*            app.UseSignalR(routes =>
+            app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/chatHub");
-            });*/
+            });
         }
     }
 }

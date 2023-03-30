@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace PostBook.Services.Dtos
+namespace ExternalTestApp.Models
 {
     public class MessageDto
     {
-        public Guid Id { get; set; }
-
         public string UserName { get; set; }
 
         public string Text { get; set; }
@@ -15,9 +14,5 @@ namespace PostBook.Services.Dtos
         public DateTime CreatedDate { get; set; }
 
         public string DateToDisplay { get; set; }
-
-        public string UserId { get; set; }
-
-        public UserDto Sender { get; set; }
     }
 }

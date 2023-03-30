@@ -6,8 +6,8 @@ namespace PostBook.Hubs
 {
     public class ChatHub : Hub
     {
-/*        public async Task SendMessage(MessageDto message) =>
-            await Clients.All.SendAsync("receiveMessage", message);*/
+        public void SendMessage(MessageDto message) =>
+            Clients.All.SendAsync("RecieveMessage", message);
 
         public Task JoinRoom(string roomId)
         {

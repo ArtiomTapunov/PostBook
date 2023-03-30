@@ -23,12 +23,14 @@ namespace PostBook.Controllers
         private readonly IUserService _userService;
         private readonly IMessageService _messageService;
         private readonly IRoomService _roomService;
+        private readonly IHubContext<ChatHub> _hubContext;
 
-        public HomeController(IUserService userService, IMessageService messageService, IRoomService roomService)
+        public HomeController(IUserService userService, IMessageService messageService, IRoomService roomService, IHubContext<ChatHub> hubContext)
         {
             _userService = userService;
             _messageService = messageService;
             _roomService = roomService;
+            _hubContext = hubContext;
         }
 
         public async Task<IActionResult> Index()
@@ -74,6 +76,15 @@ namespace PostBook.Controllers
                     UserName = createdMessage.UserName,
                     CreatedDate = createdMessage.CreatedDate.ToString("dd/MM/yyyy hh:mm:ss")
                 });
+
+            //For testing purposes
+            await _hubContext.Clients.All.SendAsync("RecieveMessage", new MessageDto
+            {
+                Text = createdMessage.Text,
+                UserName = createdMessage.UserName,
+                CreatedDate = createdMessage.CreatedDate,
+                DateToDisplay = createdMessage.CreatedDate.ToString("dd/MM/yyyy hh:mm:ss")
+            });
 
             return Ok();
         }

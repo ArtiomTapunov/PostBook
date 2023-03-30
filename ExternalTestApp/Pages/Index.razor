@@ -1,0 +1,62 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.SignalR.Client;
+@using ExternalTestApp.Models;
+
+Welcome to your new app.
+
+<div>
+    SignalR Status : @IsConnected
+    Status Updated On : @updatedOn
+</div>
+
+<h3> Incoming Messages </h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Text</th>
+            <th>Posted Date/Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in messages)
+        {
+            <tr>
+                <td>@message.UserName</td>
+                <td>@message.Text</td>
+                <td>@message.DateToDisplay</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private HubConnection? hubConnection;
+    public List<MessageDto> messages;
+    public string updatedOn;
+
+    protected override async Task OnInitializedAsync()
+    {
+        messages = new List<MessageDto>();
+
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl("http://localhost:44348/chatHub")
+            //.WithUrl("http://localhost:44348/Home/Index")
+            .Build();
+
+        Console.WriteLine(hubConnection.State);
+
+        hubConnection.On<MessageDto>("RecieveMessage", (incomingMessage) =>
+        {
+            messages.Add(incomingMessage);
+            updatedOn = DateTime.Now.ToLongDateString();
+            StateHasChanged();
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    public bool IsConnected =>
+        hubConnection?.State == HubConnectionState.Connected;
+}
